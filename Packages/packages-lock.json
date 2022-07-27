@@ -81,10 +81,11 @@
       }
     },
     "com.unity.uiextensions": {
-      "version": "file:../Assets/com.unity.uiextensions",
+      "version": "2.2.7",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
