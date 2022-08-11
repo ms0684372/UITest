@@ -24,7 +24,7 @@ public class PuzzleOperate : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         onEndDrag = _onEndDrag;
     }
 
-    public void SetStyle(Vector2[] points)
+    public void SetStyle(GridPoint[] points)
     {
         if (gridList == null)
             gridList = new List<Image>();
@@ -37,7 +37,7 @@ public class PuzzleOperate : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         for (int i = 0; i < points.Length; i++)
         {
             Image grid = gridList[i];
-            Vector3 point = points[i];
+            GridPoint point = points[i];
             grid.gameObject.SetActive(true);
             grid.rectTransform.localPosition = new Vector3(point.x * 60, point.y * 60);
         }
@@ -51,26 +51,33 @@ public class PuzzleOperate : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             gridList[i].raycastTarget = state;
     }
 
+    public void SetColor(in Color color)
+    {
+        for (int i = 0; i < gridList.Count; i++)
+            gridList[i].color = color;
+    }
+
+    public void SetPosition(Vector2 value)
+    {
+        operateItem.transform.position = value;
+    }
+
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        originalPosition = operateItem.transform.position;
         onBeginDrag?.Invoke();
-
-        Debug.Log("operate begindrag");
+        //Debug.Log("operate begindrag");
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        operateItem.transform.position = eventData.position;
         onDrag?.Invoke(eventData);
-        Debug.Log("operate ondrag");
+        //Debug.Log("operate ondrag");
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
-        operateItem.transform.position = originalPosition;
         onEndDrag?.Invoke();
-        Debug.Log("operate enddrag");
+        //Debug.Log("operate enddrag");
     }
 
     private void CreateGrid(int count)
