@@ -87,11 +87,11 @@ public class PuzzleController : MonoBehaviour
     private List<PuzzleShape> pieceList;
     private PuzzleShape currentPiece;
     private OperateData operateData;
-    private Color normalColor = Color.white;
-    private Color dragColor = new Color(1, 1, 1, 0.5f);
-    private Color failedColor = new Color(1, 0, 0, 0.5f);
-    private Color successColor = Color.blue;
-    private Color inUseColor = new Color(0, 0.42f, 1, 1);
+    private readonly Color normalColor = Color.white;
+    private readonly Color dragColor = new Color(1, 1, 1, 0.5f);
+    private readonly Color failedColor = new Color(1, 0, 0, 0.5f);
+    private readonly Color successColor = Color.blue;
+    private readonly Color inUseColor = new Color(0, 0.42f, 1, 1);
 
     private void Start()
     {
@@ -125,6 +125,9 @@ public class PuzzleController : MonoBehaviour
         operateData.operateState = false;
     }
 
+    /// <summary>
+    /// 創建拼圖片
+    /// </summary>
     private void CreatePuzzlePieces()
     {
         pieceList = new List<PuzzleShape>();
@@ -199,6 +202,7 @@ public class PuzzleController : MonoBehaviour
 
         if (operateData.operateState)
         {
+            puzzleUI.SetOperateItemColor(dragColor);
             for (int i = 0; i < operateData.points.Count; i++)
                 puzzleUI.SetGridColor(operateData.points[i], successColor);
         }
